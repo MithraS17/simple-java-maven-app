@@ -1,12 +1,18 @@
-#!/bin/bash/env groovy
+#usr/bin/groovy
+	
 
-node {
-stage ('git')
-{
-sh "git clone https://github.com/Kushagra92/simple-java-maven-app.git"
-}
-stage ('build')
-{
-sh "mvn clean test verify"
-}
-}
+	node()
+	{
+	stage('checkout')
+	{
+	checkout scm
+	}
+	stage('Build')
+	{
+	sh 'mvn clean install'
+	}
+	stage('deploy')
+	{
+	sh 'ls -la $WORKSPACE/target/'
+	}
+	}
